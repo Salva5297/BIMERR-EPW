@@ -1,0 +1,17 @@
+{
+    "datasources": [
+        {
+            "id": "EPW Values periods",
+            "type": "JsonDatasource",
+            "arguments": [
+                "$.typical_extremePeriods[*]"
+            ],
+            "connector": {
+                "arguments": [
+                    "../DataStorage/ESP_PV_Bilbao-AP-080250_TMYx-2004-2018.json"
+                ],
+                "type": "LocalFileConnector"
+            }
+        }
+    ]
+}
