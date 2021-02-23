@@ -8,7 +8,7 @@
             ],
             "connector": {
                 "arguments": [
-                    "../DataStorage/ESP_PV_Bilbao-AP-080250_TMYx-2004-2018.json"
+                    "../DataStorage/DZA_AD_Miliana-604300_TMYx-2004-2018.json"
                 ],
                 "type": "LocalFileConnector"
             }

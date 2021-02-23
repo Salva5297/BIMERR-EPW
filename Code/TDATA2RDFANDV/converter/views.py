@@ -49,12 +49,20 @@ def index(request):
     return render(request, 'converter/page.html')
 
 
+
 @csrf_exempt  # ONEBUILDIND.ORG WEATHER MAP
 def mapData(request):
     if request.method == "POST":
         response = json.loads(request.body)
         data = takeData(response)
-        # print(data)
+        flag = False
+
+        while flag == False:
+            if not os.getcwd().endswith("TDATA2RDFANDV"):
+                os.chdir("..")
+            else:
+                flag = True
+
         jsonFile = open(
             'converter/static/converter/taxonomyCitiesOneBuilding.json')
         jsonData = json.load(jsonFile)
@@ -76,6 +84,16 @@ def mapDataEnergyPlus(request):
     if request.method == "POST":
         response = json.loads(request.body)
         data = takeData(response)
+
+        flag = False
+
+        while flag == False:
+            if not os.getcwd().endswith("TDATA2RDFANDV"):
+                os.chdir("..")
+            else:
+                flag = True
+
+
         jsonFile = open(
             'converter/static/converter/taxonomyCitiesEnergyPlus.json')
         jsonData = json.load(jsonFile)
@@ -95,6 +113,10 @@ def mapDataEnergyPlus(request):
 @csrf_exempt  # EXTRACT DATA FROM LINK FROM ONEBUILDING.ORG WEATHER
 def extract_Convert(request):
     if request.method == "POST":
+
+        for file in glob.glob("converter/Results/*.ttl"):
+            os.remove(file)
+
         if not os.getcwd().endswith("DataStorage"):
             shutil.rmtree('converter/DataStorage/', ignore_errors=True)
             pathlib.Path(
@@ -181,6 +203,10 @@ def extract_Convert(request):
 @csrf_exempt
 def extract_ConvertEnergyPlus(request):
     if request.method == "POST":
+
+        for file in glob.glob("converter/Results/*.ttl"):
+            os.remove(file)
+
         if not os.getcwd().endswith("DataStorage"):
             shutil.rmtree('converter/DataStorage/', ignore_errors=True)
             pathlib.Path(
@@ -253,8 +279,6 @@ def extract_ConvertEnergyPlus(request):
                     'EPW': "static/converter/" + epw,
                     'RDF': "static/converter/" + file
                 }
-        # shutil.move(file, '../../converter/static/converter/')
-        # shutil.move(epw, '../../converter/static/converter/')
 
         return JsonResponse(dictionary, safe=False)
 
@@ -262,7 +286,20 @@ def extract_ConvertEnergyPlus(request):
 @csrf_exempt
 def extract_ConvertDarkSkyAPI(request):
     if request.method == "POST":
+
+        for file in glob.glob("converter/Results/*.ttl"):
+            os.remove(file)
+
         response = json.loads(request.body)
+
+        flag = False
+
+        while flag == False:
+            if not os.getcwd().endswith("TDATA2RDFANDV"):
+                os.chdir("..")
+            else:
+                flag = True
+
         json_data, json_name, json_path = makeRequest(
             response['latitude'], response['longitude'])
         createDSAPIMappings(json_name, json_path)
