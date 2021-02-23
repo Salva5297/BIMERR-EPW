@@ -8,7 +8,7 @@
             ],
             "connector": {
                 "arguments": [
-                    "../DSAPIDataStorage/Asia-Irkutsk(57.4708_99.7559).json"
+                    "../DSAPIDataStorage/Asia-Tomsk(57.3265_84.7266).json"
                 ],
                 "type": "LocalFileConnector"
             }

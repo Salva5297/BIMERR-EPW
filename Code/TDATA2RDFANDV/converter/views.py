@@ -35,7 +35,7 @@ from converter.Functions.parse2CSV import parseToCSV  # parse epw file to csv
 from converter.Functions.makeSH import makeSHEPW, makeSHJSON
 from converter.Functions.createEPWFile import createEPW
 from converter.Functions.createJSONFile import create8LinesJson
-from converter.Functions.sendVirtuoso import sendEPWVirtuoso, sendJSONVirtuoso
+#from converter.Functions.sendVirtuoso import sendEPWVirtuoso, sendJSONVirtuoso
 from converter.Functions.createMappingFiles import createMappings
 from converter.FunctionsDSAPI.request import makeRequest
 from converter.FunctionsDSAPI.createMappingFiles import createDSAPIMappings
@@ -117,23 +117,14 @@ def extract_Convert(request):
         for file in glob.glob("converter/Results/*.ttl"):
             os.remove(file)
 
-        if not os.getcwd().endswith("DataStorage"):
-            shutil.rmtree('converter/DataStorage/', ignore_errors=True)
-            pathlib.Path(
-                "converter/DataStorage").mkdir(parents=True, exist_ok=True)
-            for file in glob.glob("converter/static/converter/*.nt"):
-                os.remove(file)
-            for file in glob.glob("converter/static/converter/*.epw"):
-                os.remove(file)
-
-        else:
-            shutil.rmtree('../../converter/DataStorage/', ignore_errors=True)
-            pathlib.Path("../DataStorage").mkdir(parents=True, exist_ok=True)
-            os.chdir("../../../../epw2rdf-contents/TDATA2RDFANDV")
-            for file in glob.glob("converter/static/converter/*.nt"):
-                os.remove(file)
-            for file in glob.glob("converter/static/converter/*.epw"):
-                os.remove(file)
+        #Clean Storage
+        shutil.rmtree('converter/DataStorage/', ignore_errors=True)
+        pathlib.Path(
+            "converter/DataStorage").mkdir(parents=True, exist_ok=True)
+        for file in glob.glob("converter/static/converter/Downloads/*.ttl"):
+            os.remove(file)
+        for file in glob.glob("converter/static/converter/Downloads/*.epw"):
+            os.remove(file)
 
         
 
@@ -184,7 +175,10 @@ def extract_Convert(request):
 
         dictionary = {}
 
-        for file in glob.glob("*.nt"):
+        shutil.move("../Results/rdf.ttl", '../../converter/static/converter/Downloads/')
+        shutil.move("epw.epw", '../../converter/static/converter/Downloads/')
+
+        for file in glob.glob("../Results/*.ttl"):
             for epw in glob.glob("*.epw"):
                 dictionary = {
                     'METADATA': "static/converter/metadata.json",
@@ -192,11 +186,7 @@ def extract_Convert(request):
                     'EPW': "static/converter/" + epw,
                     'RDF': "static/converter/" + file
                 }
-        # shutil.move(file, '../../converter/static/converter/')
-        # shutil.move(epw, '../../converter/static/converter/')
-
         
-
         return JsonResponse(dictionary, safe=False)
 
 
@@ -207,23 +197,16 @@ def extract_ConvertEnergyPlus(request):
         for file in glob.glob("converter/Results/*.ttl"):
             os.remove(file)
 
-        if not os.getcwd().endswith("DataStorage"):
-            shutil.rmtree('converter/DataStorage/', ignore_errors=True)
-            pathlib.Path(
-                "converter/DataStorage").mkdir(parents=True, exist_ok=True)
-            for file in glob.glob("converter/static/converter/*.nt"):
-                os.remove(file)
-            for file in glob.glob("converter/static/converter/*.epw"):
-                os.remove(file)
 
-        else:
-            shutil.rmtree('../../converter/DataStorage/', ignore_errors=True)
-            pathlib.Path("../DataStorage").mkdir(parents=True, exist_ok=True)
-            os.chdir("../../../../epw2rdf-contents/TDATA2RDFANDV")
-            for file in glob.glob("converter/static/converter/*.nt"):
-                os.remove(file)
-            for file in glob.glob("converter/static/converter/*.epw"):
-                os.remove(file)
+        # Clean Storage
+
+        shutil.rmtree('converter/DataStorage/', ignore_errors=True)
+        pathlib.Path(
+            "converter/DataStorage").mkdir(parents=True, exist_ok=True)
+        for file in glob.glob("converter/static/converter/Downloads/*.ttl"):
+            os.remove(file)
+        for file in glob.glob("converter/static/converter/Downloads/*.epw"):
+            os.remove(file)
 
         response = json.loads(request.body)
         link = takeData(response)
@@ -271,7 +254,11 @@ def extract_ConvertEnergyPlus(request):
 
         dictionary = {}
 
-        for file in glob.glob("*.nt"):
+
+        shutil.move("../Results/rdf.ttl", '../../converter/static/converter/Downloads/')
+        shutil.move("epw.epw", '../../converter/static/converter/Downloads/')
+
+        for file in glob.glob("../Results/*.ttl"):
             for epw in glob.glob("*.epw"):
                 dictionary = {
                     'METADATA': "static/converter/metadata.json",
@@ -290,6 +277,13 @@ def extract_ConvertDarkSkyAPI(request):
         for file in glob.glob("converter/Results/*.ttl"):
             os.remove(file)
 
+        shutil.rmtree('converter/DSAPIDataStorage/', ignore_errors=True)
+        pathlib.Path(
+            "converter/DSAPIDataStorage").mkdir(parents=True, exist_ok=True)
+
+        for file in glob.glob("converter/static/converter/Downloads/*.ttl"):
+            os.remove(file)
+
         response = json.loads(request.body)
 
         flag = False
@@ -305,7 +299,9 @@ def extract_ConvertDarkSkyAPI(request):
         createDSAPIMappings(json_name, json_path)
         makeSHJSON(json_name)
 
-        sendJSONVirtuoso(json_name)
+        #sendJSONVirtuoso(json_name)
+
+        shutil.move("converter/Results/rdf.ttl", 'converter/static/converter/Downloads/')
 
         return JsonResponse(json_data, safe=False)
 
