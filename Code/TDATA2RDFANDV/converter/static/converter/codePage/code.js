@@ -609,7 +609,7 @@ $(document).ready(function(){
 
     $.fn.progressTimed = function(seconds, cb){
 
-        seconds = seconds+2
+        seconds = seconds+10
 
         var button = this.first(),
             bar = button.find('.tz-bar');
