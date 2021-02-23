@@ -56,10 +56,11 @@ function redirectTo(link, contador) {
         }),
         success: (data, textStatus, jqXHR) => {
             console.log(data, textStatus, jqXHR)
-            rdf = data['RDF']
-            epw = data['EPW']
-            document.getElementById('rdf').href = rdf
-            document.getElementById('epw').href = epw
+            console.log("Here making spinner hidden")
+            // rdf = data['RDF']
+            // epw = data['EPW']
+            // document.getElementById('rdf').href = rdf
+            // document.getElementById('epw').href = epw
             $("#Loading" + contador).css('visibility', 'hidden');
         },
         contentType: 'application/json',

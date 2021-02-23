@@ -114,6 +114,14 @@ def mapDataEnergyPlus(request):
 def extract_Convert(request):
     if request.method == "POST":
 
+        flag = False
+
+        while flag == False:
+            if not os.getcwd().endswith("TDATA2RDFANDV"):
+                os.chdir("..")
+            else:
+                flag = True
+
         #Clean Storage
 
         shutil.rmtree('converter/Results/', ignore_errors=True)
@@ -196,6 +204,14 @@ def extract_Convert(request):
 def extract_ConvertEnergyPlus(request):
     if request.method == "POST":
 
+        flag = False
+
+        while flag == False:
+            if not os.getcwd().endswith("TDATA2RDFANDV"):
+                os.chdir("..")
+            else:
+                flag = True
+
         # Clean Storage
 
         shutil.rmtree('converter/Results/', ignore_errors=True)
@@ -241,6 +257,9 @@ def extract_ConvertEnergyPlus(request):
         create8LinesJson(data, numberRowstoSkip, epwName)
 
         # Create mapping files with epwName
+
+
+        print(os.getcwd())
 
         createMappings(epwName)
 
