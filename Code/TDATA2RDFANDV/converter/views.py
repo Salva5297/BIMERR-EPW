@@ -114,17 +114,19 @@ def mapDataEnergyPlus(request):
 def extract_Convert(request):
     if request.method == "POST":
 
-        for file in glob.glob("converter/Results/*.ttl"):
-            os.remove(file)
-
         #Clean Storage
+
+        shutil.rmtree('converter/Results/', ignore_errors=True)
+        pathlib.Path(
+            "converter/Results/").mkdir(parents=True, exist_ok=True)
+
         shutil.rmtree('converter/DataStorage/', ignore_errors=True)
         pathlib.Path(
             "converter/DataStorage").mkdir(parents=True, exist_ok=True)
-        for file in glob.glob("converter/static/converter/Downloads/*.ttl"):
-            os.remove(file)
-        for file in glob.glob("converter/static/converter/Downloads/*.epw"):
-            os.remove(file)
+        
+        shutil.rmtree('converter/static/converter/Downloads/', ignore_errors=True)
+        pathlib.Path(
+            "converter/static/converter/Downloads/").mkdir(parents=True, exist_ok=True)
 
         
 
@@ -194,19 +196,20 @@ def extract_Convert(request):
 def extract_ConvertEnergyPlus(request):
     if request.method == "POST":
 
-        for file in glob.glob("converter/Results/*.ttl"):
-            os.remove(file)
-
-
         # Clean Storage
+
+        shutil.rmtree('converter/Results/', ignore_errors=True)
+        pathlib.Path(
+            "converter/Results/").mkdir(parents=True, exist_ok=True)
+
 
         shutil.rmtree('converter/DataStorage/', ignore_errors=True)
         pathlib.Path(
             "converter/DataStorage").mkdir(parents=True, exist_ok=True)
-        for file in glob.glob("converter/static/converter/Downloads/*.ttl"):
-            os.remove(file)
-        for file in glob.glob("converter/static/converter/Downloads/*.epw"):
-            os.remove(file)
+
+        shutil.rmtree('converter/static/converter/Downloads/', ignore_errors=True)
+        pathlib.Path(
+            "converter/static/converter/Downloads/").mkdir(parents=True, exist_ok=True)
 
         response = json.loads(request.body)
         link = takeData(response)
@@ -273,16 +276,19 @@ def extract_ConvertEnergyPlus(request):
 @csrf_exempt
 def extract_ConvertDarkSkyAPI(request):
     if request.method == "POST":
+        
+        shutil.rmtree('converter/Results/', ignore_errors=True)
+        pathlib.Path(
+            "converter/Results/").mkdir(parents=True, exist_ok=True)
 
-        for file in glob.glob("converter/Results/*.ttl"):
-            os.remove(file)
+        shutil.rmtree('converter/static/converter/Downloads/', ignore_errors=True)
+        pathlib.Path(
+            "converter/static/converter/Downloads/").mkdir(parents=True, exist_ok=True)
 
         shutil.rmtree('converter/DSAPIDataStorage/', ignore_errors=True)
         pathlib.Path(
             "converter/DSAPIDataStorage").mkdir(parents=True, exist_ok=True)
 
-        for file in glob.glob("converter/static/converter/Downloads/*.ttl"):
-            os.remove(file)
 
         response = json.loads(request.body)
 
