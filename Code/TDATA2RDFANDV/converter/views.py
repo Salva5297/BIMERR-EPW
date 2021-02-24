@@ -360,6 +360,15 @@ def extract_ConvertDarkSkyAPI(request):
 @csrf_exempt
 def downloadEPW(request):
     if request.method == "POST":
+
+        flag = False
+
+        while flag == False:
+            if not os.getcwd().endswith("TDATA2RDFANDV"):
+                os.chdir("..")
+            else:
+                flag = True
+
         response = request.data
         resultList = main(response)
         if resultList[0].endswith('.epw') and not resultList[0].startswith("http"):
@@ -417,6 +426,15 @@ def downloadEPW(request):
 @csrf_exempt
 def getEPWYears(request):
     if request.method == "POST":
+
+        flag = False
+
+        while flag == False:
+            if not os.getcwd().endswith("TDATA2RDFANDV"):
+                os.chdir("..")
+            else:
+                flag = True
+
         response = request.data
         resultList = mainYear(response)
         resultList = ','.join(resultList)
