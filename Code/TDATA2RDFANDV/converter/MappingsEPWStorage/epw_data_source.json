@@ -8,7 +8,7 @@
             ],
             "connector": {
                 "arguments": [
-                    "../DataStorage/DZA_AD_Miliana-604300_TMYx-2004-2018.json"
+                    "../DataStorage/RUS_Chita-307580_IWEC.json"
                 ],
                 "type": "LocalFileConnector"
             }
