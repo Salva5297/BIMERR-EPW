@@ -340,7 +340,7 @@ map:map_LiquidPrecipitationDepth_0 rml:logicalSource map:source_51;
     rr:subjectMap map:s_51;
     rr:predicateObjectMap map:pom_150.
 map:map_LiquidPrecipitationDepthMeasurement_0 rml:logicalSource map:source_52;
-    a rr:TriplesMap;https
+    a rr:TriplesMap;
     rdfs:label "LiquidPrecipitationDepthMeasurement";
     rr:subjectMap map:s_52;
     rr:predicateObjectMap map:pom_151, map:pom_152, map:pom_153, map:pom_154, map:pom_155.
