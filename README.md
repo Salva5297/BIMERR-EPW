@@ -4,7 +4,7 @@
 
 ## BIMERR EPW FILES
 
-In the [epw folder](/epw) we can see an example of an [epw file](./epw/ESP_PV_Bilbao-AP-080250_TMYx-2004-2018.epw), which has been transformed into a [json file](./epw/ESP_PV_Bilbao-AP-080250_TMYx-2004-2018.json), with which the corresponding [RDF files](./epw/ESP_PV_Bilbao-AP-080250_TMYx-2004-2018.ttl) have been obtained by means of declarative mappings. These files contain typical meteorological years in a given location and in all months belonging to a year, either in the same year or in different years.
+In the [epw folder](./epw) we can see an example of an [epw file](./epw/ESP_PV_Bilbao-AP-080250_TMYx-2004-2018.epw), which has been transformed into a [json file](./epw/ESP_PV_Bilbao-AP-080250_TMYx-2004-2018.json), with which the corresponding [RDF files](./epw/ESP_PV_Bilbao-AP-080250_TMYx-2004-2018.ttl) have been obtained by means of declarative mappings. These files contain typical meteorological years in a given location and in all months belonging to a year, either in the same year or in different years.
 
 This files come from [Energy Plus Weather](https://www.energyplus.net/weather) site, and [Climate OneBuilding](http://climate.onebuilding.org/).
 
